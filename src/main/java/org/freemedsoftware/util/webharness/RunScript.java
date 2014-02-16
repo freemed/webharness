@@ -44,8 +44,8 @@ public class RunScript {
 		ScriptEngine engine = engineMgr.getEngineByName("JavaScript");
 
 		// Instantiate web client (htmlunit)
-		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_3);
-		webClient.setJavaScriptEnabled(true);
+		WebClient webClient = new WebClient(BrowserVersion.CHROME);
+		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.setRefreshHandler(new RefreshHandler() {
 			@Override
 			public void handleRefresh(Page arg0, URL arg1, int arg2)

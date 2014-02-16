@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+version = '0.2'
+ 
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+ 
+defaultTasks = ['clean', 'jar']
+
+repositories {
+	mavenCentral()
+}
+ 
+dependencies {
+	compile 'log4j:log4j:1.2.16'
+	compile 'net.sourceforge.htmlunit:htmlunit:2.13'
+	compile 'org.mozilla:rhino:1.7R4'
+	compile 'commons-cli:commons-cli:1.2'
+    
+	testCompile 'junit:junit:4.+'
+}
+
+jar {
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+	manifest {
+		attributes 'Main-Class': 'org.freemedsoftware.util.webharness.RunScript'
+	}
+}

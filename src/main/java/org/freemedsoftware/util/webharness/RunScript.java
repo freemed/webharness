@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.RefreshHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -46,6 +47,10 @@ public class RunScript {
 		// Instantiate web client (htmlunit)
 		WebClient webClient = new WebClient(BrowserVersion.CHROME);
 		webClient.getOptions().setJavaScriptEnabled(true);
+
+		// Fix AJAX responses
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+
 		webClient.setRefreshHandler(new RefreshHandler() {
 			@Override
 			public void handleRefresh(Page arg0, URL arg1, int arg2)
